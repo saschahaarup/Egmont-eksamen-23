@@ -1,0 +1,21 @@
+/*
+Theme Name: child_theme_egmont
+Author: 
+Description: Your description goes here
+Version: 1.0
+Template: astra
+
+This is the child theme for Astra theme, generated with Generate Child Theme plugin by catchthemes.
+
+(optional values you can add: Theme URI, Author URI, License, License URI, Tags, Text Domain)
+*/
+
+.slide1 .ast-single-post .entry-content a,
+.ast-comment-content a:not(.ast-comment-edit-reply-wrap a) {
+  text-decoration: none !important;
+}
+
+a:link a:visited a:active a:hover .site-title {
+  text-emphasis: none !important;
+  text-decoration: none !important;
+}

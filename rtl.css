@@ -1,0 +1,9 @@
+/*
+Theme Name:     child_theme_egmont
+Template:       astra
+
+This is the child theme for Astra theme, generated with Generate Child Theme plugin by catchthemes.
+
+Right to Left text support.
+*/
+@import url("../twentyseventeen/rtl.css");

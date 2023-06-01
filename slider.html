@@ -1,0 +1,567 @@
+<body>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <style>
+        @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          font-family: "Bebas Neue", sans-serif;
+          background: #fff;
+          color: #ffff;
+          line-height: 1.6;
+        }
+
+        .slider {
+          overflow: hidden;
+          height: 76vh;
+          width: 100vw;
+        }
+
+        .slide {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: opacity 0.4s ease-in-out;
+        }
+
+        .slide.current {
+          opacity: 1;
+        }
+
+        .slide .content {
+          position: absolute;
+          bottom: 70px;
+          left: -600px;
+          opacity: 0;
+          width: 600px;
+          background-color: transparent;
+          color: #fff;
+          padding: 35px;
+          vertical-align: middle;
+        }
+
+        .slide .content h1 {
+          margin-bottom: 10px;
+          color: #ffff;
+          vertical-align: middle;
+        }
+        .slide .content h2 {
+          margin-bottom: 10px;
+          color: #ffff;
+          vertical-align: middle;
+        }
+
+        .slide.current .content {
+          opacity: 1;
+          transform: translateX(600px);
+          padding-left: 10%;
+          vertical-align: middle;
+        }
+
+        .buttons button#next {
+          position: absolute;
+          top: 40%;
+          right: 15px;
+        }
+
+        .buttons button#prev {
+          position: absolute;
+          top: 40%;
+          left: 15px;
+        }
+
+        .buttons button {
+          background-color: #3c3c3c;
+          color: #fff;
+          cursor: pointer;
+          padding: 13px 15px;
+          border-radius: 50%;
+          outline: none;
+          transform: all 0.2s ease-in-out;
+        }
+
+        .buttons button:hover {
+          background-color: #fff;
+          color: #ffcbbf;
+          transform: scale(1.2);
+        }
+
+        @media (max-width: 500px) {
+          .slide .content {
+            bottom: -220px;
+            left: 0;
+            height: 50vh;
+            width: 100%;
+            font-size: 15px;
+          }
+          .slide.current .content p {
+            font-size: 15px;
+          }
+          .slide.current .content {
+            transform: translateY(-300px);
+          }
+          .slide .content h1 {
+            margin-bottom: 10px;
+            color: #ffff;
+            vertical-align: middle;
+            font-size: 40px;
+          }
+          .slide .content h2 {
+            margin-bottom: 10px;
+            color: #ffff;
+            vertical-align: middle;
+            font-size: 30px;
+          }
+
+          .buttons button#next {
+            position: absolute;
+            top: 100%;
+          }
+
+          .buttons button#prev {
+            position: absolute;
+            top: 100%;
+          }
+        }
+
+        /* Backgorund Images */
+
+        .slide:first-child {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/history_1.jpg")
+              no-repeat center top/cover;
+        }
+        .slide:nth-child(2) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/history_2.jpg")
+              no-repeat center top/cover;
+        }
+        .slide:nth-child(3) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/history_3.jpg")
+              no-repeat center top/cover;
+        }
+        .slide:nth-child(4) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/history_4.jpg")
+              no-repeat center top/cover;
+        }
+        .slide:nth-child(5) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/history_5.jpg")
+              no-repeat center top/cover;
+        }
+        .slide:nth-child(6) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/1920.jpg")
+              no-repeat center center/cover;
+        }
+        .slide:nth-child(7) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/history_donald-jpg.webp")
+              no-repeat center center/cover;
+        }
+        .slide:nth-child(8) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/1950s.png")
+              no-repeat center center/cover;
+        }
+        .slide:nth-child(9) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/boeger_header.webp")
+              no-repeat center center/cover;
+        }
+        .slide:nth-child(10) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/1980s.png")
+              no-repeat center center/cover;
+        }
+        .slide:nth-child(11) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/1992-jpg.webp")
+              no-repeat center center/cover;
+        }
+        .slide:nth-child(12) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/e-com_header.webp")
+              no-repeat center center/cover;
+        }
+        .slide:nth-child(13) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/uddannelse_header.webp")
+              no-repeat center center/cover;
+        }
+        .slide:nth-child(14) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/spil_header.webp")
+              no-repeat center center/cover;
+        }
+        .slide:nth-child(15) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/2020.png")
+              no-repeat center center/cover;
+        }
+        .slide:nth-child(16) {
+          background: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.78),
+              rgba(255, 255, 255, 0)
+            ),
+            url("http://saschahaaruploeschenkohl.dk/kea/Egmont/wp-content/uploads/2023/05/brand_header.webp")
+              no-repeat center center/cover;
+        }
+      </style>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>Full Screen Slider</title>
+      <link
+        rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous"
+      />
+      <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+      <div class="slider">
+        <div class="slide current">
+          <div class="content">
+            <h1>1878</h1>
+            <h2>P. Petersens Bogtrykkeri stiftes</h2>
+            <p>
+              Historien om Egmont begynder i en beskeden lejlighed i København.
+              Den unge typograf Egmont Harald Petersen køber en “fluesmækker”,
+              en hånddrevet og enkel trykkemaskine, med støtte fra sin mor,
+              Petrine Petersen. Som enlig forælder pantsætter hans mor alle
+              hendes ejendele for at hjælpe ham med at købe maskinen og starte
+              sit eget trykkeri P. Petersens Bogtrykkeri.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>1880'erne</h1>
+            <h2>Fornyelse af forretningsmodellen</h2>
+            <p>
+              Snart begynder enkeltmandsvirksomheden at udvikle sig. Fra print
+              af visitkort, fakturaer og brevpapir går Egmont H. Petersen videre
+              til at trykke bøger og blade. Virksomheden flytter ind i nye
+              faciliteter i København, nye trykkemaskiner indkøbes, medarbejdere
+              ansættes, og store virksomheder kommer på kundelisten.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>1890'erne</h1>
+            <h2>Frontløber inden for farvetryk</h2>
+            <p>
+              Egmont H. Petersen er den første, der anvender farvetryk i
+              Danmark, hvilket bringer firefarvetryk ind i mainstream. Han
+              sørger altid for at holde sig opdateret på den nyeste trykteknik
+              og finder inspiration fra udlandet og i fagpublikationer.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>1901</h1>
+            <h2>Magasinforlag</h2>
+            <p>
+              Egmont H. Petersen begynder at trykke magasinet Damernes Blad og
+              et år senere bliver han dets publicist. Han skifter navn til
+              Hjemmet og sætter stærke kvinder i spidsen for bladet. Dette er
+              forstyrrende på det tidspunkt.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>1914</h1>
+            <h2>Gutenberghus bygges</h2>
+            <p>
+              Med øget aktivitet og fortsat vækst beslutter Egmont H. Petersen
+              sig for at bygge et stort trykkeri og magasinvirksomhed i centrum
+              af København. Den nye bygning, såvel som forretningen, hedder nu
+              Gutenberghus efter opfinderen af trykkeriet, Johann Gutenberg.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>1920</h1>
+            <h2>Egmont Fonden oprettes</h2>
+            <p>
+              Egmont H. Petersen dør i 1914, og hans sidste vilje er, at en del
+              af virksomhedens overskud skal "anvendes til filantropiske
+              formål". I 1920 forvandler hans kone Elisabeth og deres fem børn
+              virksomheden til en fond, der skal forbedre livet for fattige og
+              udsatte børn og familier.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>1948</h1>
+            <h2>Historie Tager Anders And til Skandinavien</h2>
+            <p>
+              Gutenberghus opnår licensen til at udgive Walt Disneys tegneserier
+              og historier i Skandinavien, herunder den berømte karakter Anders
+              And. Det er Dan Folke, den daværende direktør for Gutenberghus,
+              der opdager den elskede karakter på sine rejser til Amerika og
+              bringer ham til Skandinavien for at videreudvikle og øge
+              populariteten.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>1950'erne</h1>
+            <h2>International ekspansion</h2>
+            <p>
+              Efter 2. Verdenskrig udvider Gutenberghus til andre lande uden for
+              Skandinavien. Først til de tysktalende lande, derefter til
+              Storbritannien og senere til de østeuropæiske markeder.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>1961</h1>
+            <h2>Bogudgivelse</h2>
+            <p>
+              Gutenberghus begynder at udgive bøger og baner jorden for det, der
+              senere bliver til bogforlaget Lindhardt og Ringhof.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>1980'erne</h1>
+            <h2>Digitale muligheder</h2>
+            <p>
+              I slutningen af 1980'erne begynder Gutenberghus at udforske nye og
+              spændende digitale muligheder. I dagens Egmont er digital
+              innovation og nye teknologier en del af alle aspekter af
+              forretningen.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>1992</h1>
+            <h2>Udvider til TV og film</h2>
+            <p>
+              Gutenberghus skifter navn til Egmont. Sammen med en gruppe
+              partnere fra medieverdenen stifter Egmont TV Gruppen Norge, den
+              førende public service-kanal i Norge. Siden 2012 har Egmont været
+              eneejer af TV 2. I 1992 går Egmont også sammen med Nordens førende
+              leverandør af underholdning, Nordisk Film, og vokser til
+              filmproduktion og - distribution.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>2013</h1>
+            <h2>Går ind i e-handel</h2>
+            <p>
+              Story House Egmont rykker ind i e-handelsbranchen og begynder at
+              opbygge en portefølje af succesfulde nordiske
+              e-handelsvirksomheder.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>2014</h1>
+            <h2>Digitale bogudgivelser og gavekortløsninger</h2>
+            <p>
+              Lindhardt og Ringhofs internationale digitale forlag SAGA begynder
+              hurtigt at udvide udgivelsesaktiviteterne af lydbøger og e-bøger
+              verden over. I 2014 bliver GoGift, leverandør af skalerbare
+              digitale gavekortløsninger, en del af Nordisk Film.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>2016</h1>
+            <h2>Investering i spilstudier</h2>
+            <p>
+              Nordisk Games, en del af Nordisk Film, begynder at investere i
+              europæiske spilstudier og opbygge en stærk portefølje. Nordisk
+              Film er også officiel distributør af Sonys PlayStation i Norden og
+              Baltikum.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>2020</h1>
+            <h2>100 år med at være en fond</h2>
+            <p>
+              Egmont har nu skabt stærke historier og givet tilbage til
+              samfundet i 100 år. Hvert år donerer vi ca. 13 mio. EUR til at
+              støtte udsatte børn og unge til at få en uddannelse og et godt
+              liv.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="content">
+            <h1>I dag</h1>
+            <h2>Udvikle vores kerne og bygge nye virksomheder</h2>
+            <p>
+              Egmont fortsætter med at udvikle medier med storytelling, ny
+              teknologi, kreativitet og publicering – og ved at bevæge sig ind
+              på nye platforme for at vokse med den moderne forbruger. Vi
+              støtter fortsat velgørende initiativer og arbejder for, at alle
+              børn og unge kan gennemføre en ungdomsuddannelse.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button id="prev"><i class="fas fa-arrow-left"></i></button>
+        <button id="next"><i class="fas fa-arrow-right"></i></button>
+      </div>
+
+      <script>
+        const slides = document.querySelectorAll(".slide");
+        const next = document.querySelector("#next");
+        const prev = document.querySelector("#prev");
+        const auto = false; // Auto scroll
+        const intervalTime = 2000;
+        let slideInterval;
+
+        const nextSlide = () => {
+          // Get current class
+          const current = document.querySelector(".current");
+          // Remove current class
+          current.classList.remove("current");
+          // Check for next slide
+          if (current.nextElementSibling) {
+            // Add current to next sibling
+            current.nextElementSibling.classList.add("current");
+          } else {
+            // Add current to start
+            slides[0].classList.add("current");
+          }
+          setTimeout(() => current.classList.remove("current"));
+        };
+
+        const prevSlide = () => {
+          // Get current class
+          const current = document.querySelector(".current");
+          // Remove current class
+          current.classList.remove("current");
+          // Check for prev slide
+          if (current.previousElementSibling) {
+            // Add current to prev sibling
+            current.previousElementSibling.classList.add("current");
+          } else {
+            // Add current to last
+            slides[slides.length - 1].classList.add("current");
+          }
+          setTimeout(() => current.classList.remove("current"));
+        };
+
+        // Button events
+        next.addEventListener("click", (e) => {
+          nextSlide();
+          if (auto) {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, intervalTime);
+          }
+        });
+
+        prev.addEventListener("click", (e) => {
+          prevSlide();
+          if (auto) {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, intervalTime);
+          }
+        });
+
+        // Auto slide
+        if (auto) {
+          // Run next slide at interval time
+          slideInterval = setInterval(nextSlide, intervalTime);
+        }
+      </script>
+    </body>
+  </html>
+</body>
